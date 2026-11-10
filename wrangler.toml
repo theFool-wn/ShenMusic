@@ -1,0 +1,103 @@
+# =============================================================================================================
+# Cloudflare Worker 配置文件 - ShenMusic
+# 部署命令: pip install uv && uv sync && uv run pywrangler deploy
+# 本地开发: pip install uv && uv sync && uv run pywrangler dev
+# =============================================================================================================
+
+name = "shen-music"
+main = "ShenMusic_Worker.py"
+compatibility_date = "2026-10-10"
+compatibility_flags = ["python_workers"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+redact_query_string = false
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+persist = true
+
+[observability.issue_detection]
+enabled = true
+
+
+# -------------------------------------------------------------------------------------------------------------
+# 静态资源目录（Workers Assets）
+# Workers Assets 会自动通过 env.ASSETS.fetch() 提供这些文件
+# -------------------------------------------------------------------------------------------------------------
+[assets]
+directory = "./static"
+binding = "ASSETS"
+run_worker_first = ["/*", "!/robots.txt", "!/sw.js", "!/manifest.json"]
+html_handling = "none"
+
+# -------------------------------------------------------------------------------------------------------------
+# KV 命名空间绑定
+# 用途: 存储登录 Session (session:*) 和歌库缓存 (shen:cache:song_list)
+#
+# 创建命令:
+#     npx wrangler kv namespace create ShenMusicKV
+# 输出: { binding = "ShenMusicKV", id = "xxxxxxxxxxxxxxxx" }
+# -------------------------------------------------------------------------------------------------------------
+[[kv_namespaces]]
+binding = "ShenMusicKV"
+id = "a0d5755ed39e4cd983ca09e6403394cf"
+
+# -------------------------------------------------------------------------------------------------------------
+# R2 存储桶绑定
+# 用途: 存储音乐文件 (music/*.mp3) 和歌词文件 (lyrics/*.lrc)
+#
+# 创建命令:
+#     npx wrangler r2 bucket create ShenMusicLibrary
+# -------------------------------------------------------------------------------------------------------------
+[[r2_buckets]]
+binding = "ShenMusicLibrary"
+bucket_name = "shen-music-library"
+
+# -------------------------------------------------------------------------------------------------------------
+# 非敏感环境变量
+# -------------------------------------------------------------------------------------------------------------
+[vars]
+APP_NAME = "Shen's Music"
+
+# R2 中的路径
+MUSIC_PREFIX  = "music/"
+LYRIC_PREFIX  = "lyrics/"
+
+# KV 缓存
+CACHE_KEY     = "cache:song_list"   # 歌库缓存
+ID3_PER_RELOAD = 1                  # 每次 Reload 最多解析 1 首新歌，避免触发 CPU 限制
+
+# JWT Token 有效期 (30 天免登录)
+TOKEN_TTL_DAYS = 30
+
+# Cookie 名称
+COOKIE_NAME = "session_token"
+
+# ID3 最少读取前 64KB; 标签较大时会按标签头自动扩展
+ID3_HEADER_SIZE = 65536
+
+# -------------------------------------------------------------------------------------------------------------
+# 敏感变量:
+#     SITE_PASSWORD
+#     JWT_SECRET
+# 在 Dashboard 中设置 Secret:
+#     Worker → Settings → Variables and Secrets → Secrets → Add: SITE_PASSWORD
+# 或者用命令:
+#     npx wrangler secret put SITE_PASSWORD
+# -------------------------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------------------------
+# 自定义域名
+# -------------------------------------------------------------------------------------------------------------
+[[routes]]
+pattern = "929hz.wangnan.net"
+custom_domain = true

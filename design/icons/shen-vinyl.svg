@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+    <defs>
+        <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#102630"></stop>
+            <stop offset="0.5" stop-color="#183741"></stop>
+            <stop offset="1" stop-color="#102630"></stop>
+        </linearGradient>
+    </defs>
+    <circle cx="24" cy="24" r="22" fill="url(#vg)" stroke="#26b6cc" stroke-width="1"></circle>
+    <circle cx="24" cy="24" r="16" fill="none" stroke="rgba(38,182,204,0.2)" stroke-width="0.8"></circle>
+    <circle cx="24" cy="24" r="11" fill="none" stroke="rgba(38,182,204,0.15)" stroke-width="0.8"></circle>
+    <g stroke="rgba(38,182,204,0.35)" stroke-width="0.8">
+        <line x1="24" y1="8" x2="24" y2="13"></line>
+        <line x1="24" y1="35" x2="24" y2="40"></line>
+        <line x1="8" y1="24" x2="13" y2="24"></line>
+        <line x1="35" y1="24" x2="40" y2="24"></line>
+        <line x1="12.6" y1="12.6" x2="16.2" y2="16.2"></line>
+        <line x1="31.8" y1="31.8" x2="35.4" y2="35.4"></line>
+        <line x1="35.4" y1="12.6" x2="31.8" y2="16.2"></line>
+        <line x1="16.2" y1="31.8" x2="12.6" y2="35.4"></line>
+    </g>
+    <path transform="translate(13, 13.5) scale(0.9)" fill="#87dfe8" d="M16.673,4.799c-1.23-0.659-2.294-1.228-2.688-3.196c-0.075-0.379-0.434-0.64-0.81-0.6C12.792,1.042,12.5,1.364,12.5,1.75 v13.16c-0.798-0.56-1.843-0.91-3-0.91C7.019,14,5,15.57,5,17.5S7.019,21,9.5,21s4.5-1.57,4.5-3.5V4.794 c0.622,0.608,1.332,0.988,1.965,1.327C17.382,6.879,18.5,7.478,18.5,10.25c0,0.414,0.336,0.75,0.75,0.75S20,10.664,20,10.25 C20,6.58,18.232,5.634,16.673,4.799z"></path>
+</svg>

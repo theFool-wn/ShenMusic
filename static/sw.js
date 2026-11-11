@@ -1,5 +1,5 @@
 // Static assets only
-const VERSION = '1.0.0';
+const VERSION = '1.0.1';
 const CACHE_PREFIX = 'ShenMusic-static-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 const STATIC_CACHE = [

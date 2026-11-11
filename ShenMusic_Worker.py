@@ -1,5 +1,5 @@
 # @             Project: ShenMusic -> ShenMusic_Worker.py
-# @     Release Version: 1.0.0
+# @     Release Version: 1.0.1
 # @              Author: WangNan
 # @       Creation Date: 2026/11/6 18:02
 # @         Description: A Private Music Player about ZhouShen
